@@ -11,6 +11,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Phd_Portal_Grp1_DA3B.Models
 {
+    [Table("SubmissionDetails")]
     public class SubmissionDetails
     {
         [Key]

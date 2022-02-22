@@ -67,6 +67,7 @@ namespace Phd_Portal_Grp1_DA3B.Controllers
             {
                 if (year_diff >= 18)
                 {
+                    
                     _context.Add(student);
                     await _context.SaveChangesAsync();
                     return RedirectToAction(nameof(Index));

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +11,7 @@ using Phd_Portal_Grp1_DA3B.Models;
 
 namespace Phd_Portal_Grp1_DA3B.Controllers
 {
+
     public class ProjectsController : Controller
     {
         private readonly ApplicationDbContext _context;

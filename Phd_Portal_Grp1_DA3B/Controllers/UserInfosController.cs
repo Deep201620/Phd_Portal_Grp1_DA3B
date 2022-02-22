@@ -48,7 +48,7 @@ namespace Phd_Portal_Grp1_DA3B.Controllers
         public IActionResult Create()
         {
             var list = new List<string>() { "Admin", "Professor", "Student" };
-            // send data from action method to View
+            // send data from controller to View
             ViewBag.list = list;
             UserInfo usr = new UserInfo()
             {

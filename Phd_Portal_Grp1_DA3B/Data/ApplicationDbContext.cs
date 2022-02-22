@@ -7,7 +7,7 @@ using Phd_Portal_Grp1_DA3B.Models;
 
 namespace Phd_Portal_Grp1_DA3B.Data
 {
-    public class ApplicationDbContext : IdentityDbContext
+    public class ApplicationDbContext : DbContext
     {
         public DbSet<UserInfo> Userinfo { get; set; }
         public DbSet<Faculty> Faculties { get; set; }
