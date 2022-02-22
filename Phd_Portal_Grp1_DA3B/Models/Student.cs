@@ -14,7 +14,7 @@ namespace Phd_Portal_Grp1_DA3B.Models
         public int SerialNo { get; set; }
 
         [Display(Name = "User Id")]
-        
+
         [ForeignKey("UserId")]
         public int UserId { get; set; }
         public virtual UserInfo user { get; set; }
@@ -31,7 +31,6 @@ namespace Phd_Portal_Grp1_DA3B.Models
         public DateTime DateOfBirth { get; set; }
 
         [DataType(DataType.Upload)]
-        [Required]
         [Display(Name = "Profile Image")]
         public string ImageUrl { get; set; }
 

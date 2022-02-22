@@ -4,13 +4,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Phd_Portal_Grp1_DA3B.Data;
 using Phd_Portal_Grp1_DA3B.Models;
 
 namespace Phd_Portal_Grp1_DA3B.Controllers
 {
+
     public class UserInfosController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -72,7 +72,7 @@ namespace Phd_Portal_Grp1_DA3B.Controllers
 
                 ModelState.Clear();
                 ViewBag.Message = userInfo.Name + " is successfully registered";
-                //return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Login));
             }
             var list = new List<string>() { "Admin", "Professor", "Student" };
             // send data from action method to View
@@ -185,19 +185,20 @@ namespace Phd_Portal_Grp1_DA3B.Controllers
                 }
                 else
                 {
-                    return RedirectToAction("Index", "Professors");
+                    return RedirectToAction("Index", "Faculties");
                 }
             }
             else
             {
-                ModelState.AddModelError("", "username or password is wrong");
+                ModelState.AddModelError("", "Username or Password is  Incorrect");
             }
             return View();
         }
 
         public IActionResult Logout()
         {
-            return RedirectToAction("Index");
+            HttpContext.Session.Clear();
+            return RedirectToAction("Index","Home");
         }
     }
 }

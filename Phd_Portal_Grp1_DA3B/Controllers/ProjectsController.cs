@@ -8,27 +8,24 @@ using Microsoft.EntityFrameworkCore;
 using Phd_Portal_Grp1_DA3B.Data;
 using Phd_Portal_Grp1_DA3B.Models;
 
-
 namespace Phd_Portal_Grp1_DA3B.Controllers
 {
-   
-    public class StudentsController : Controller
+    public class ProjectsController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public StudentsController(ApplicationDbContext context)
+        public ProjectsController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: Students
+        // GET: Projects
         public async Task<IActionResult> Index()
         {
-            
-            return View(await _context.Students.ToListAsync());
+            return View(await _context.Projects.ToListAsync());
         }
 
-        // GET: Students/Details/5
+        // GET: Projects/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -36,50 +33,39 @@ namespace Phd_Portal_Grp1_DA3B.Controllers
                 return NotFound();
             }
 
-            var student = await _context.Students
-                .FirstOrDefaultAsync(m => m.UserId == id);
-            if (student == null)
+            var project = await _context.Projects
+                .FirstOrDefaultAsync(m => m.ProjectId == id);
+            if (project == null)
             {
                 return NotFound();
             }
 
-            return View(student);
+            return View(project);
         }
 
-        // GET: Students/Create
+        // GET: Projects/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Students/Create
+        // POST: Projects/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Student student)
+        public async Task<IActionResult> Create([Bind("ProjectId,ProjectTitle,ProjectDescription,StartDate,EndDate")] Project project)
         {
-            int year = DateTime.Now.Year;
-            int year2  = student.DateOfBirth.Year;
-            int year_diff = year - year2;
-
             if (ModelState.IsValid)
             {
-                if (year_diff >= 18)
-                {
-                    _context.Add(student);
-                    await _context.SaveChangesAsync();
-                    return RedirectToAction(nameof(Index));
-                }
-                else
-                {
-                    ModelState.AddModelError("", "You must be 18 years old.");
-                }
+                _context.Add(project);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
             }
-            return View();
+            return View(project);
         }
 
-        // GET: Students/Edit/5
+        // GET: Projects/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -87,22 +73,22 @@ namespace Phd_Portal_Grp1_DA3B.Controllers
                 return NotFound();
             }
 
-            var student = await _context.Students.FindAsync(id);
-            if (student == null)
+            var project = await _context.Projects.FindAsync(id);
+            if (project == null)
             {
                 return NotFound();
             }
-            return View(student);
+            return View(project);
         }
 
-        // POST: Students/Edit/5
+        // POST: Projects/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, Student student)
+        public async Task<IActionResult> Edit(int id, [Bind("ProjectId,ProjectTitle,ProjectDescription,StartDate,EndDate")] Project project)
         {
-            if (id != student.UserId)
+            if (id != project.ProjectId)
             {
                 return NotFound();
             }
@@ -111,12 +97,12 @@ namespace Phd_Portal_Grp1_DA3B.Controllers
             {
                 try
                 {
-                    _context.Update(student);
+                    _context.Update(project);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!StudentExists(student.UserId))
+                    if (!ProjectExists(project.ProjectId))
                     {
                         return NotFound();
                     }
@@ -127,10 +113,10 @@ namespace Phd_Portal_Grp1_DA3B.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(student);
+            return View(project);
         }
 
-        // GET: Students/Delete/5
+        // GET: Projects/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -138,30 +124,30 @@ namespace Phd_Portal_Grp1_DA3B.Controllers
                 return NotFound();
             }
 
-            var student = await _context.Students
-                .FirstOrDefaultAsync(m => m.UserId == id);
-            if (student == null)
+            var project = await _context.Projects
+                .FirstOrDefaultAsync(m => m.ProjectId == id);
+            if (project == null)
             {
                 return NotFound();
             }
 
-            return View(student);
+            return View(project);
         }
 
-        // POST: Students/Delete/5
+        // POST: Projects/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var student = await _context.Students.FindAsync(id);
-            _context.Students.Remove(student);
+            var project = await _context.Projects.FindAsync(id);
+            _context.Projects.Remove(project);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool StudentExists(int id)
+        private bool ProjectExists(int id)
         {
-            return _context.Students.Any(e => e.UserId == id);
+            return _context.Projects.Any(e => e.ProjectId == id);
         }
     }
 }
