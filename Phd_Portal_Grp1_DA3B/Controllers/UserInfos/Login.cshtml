@@ -1,0 +1,33 @@
+﻿@model Phd_Portal_Grp1_DA3B.Models.UserInfo;
+@{
+    ViewData["Title"] = "Login";
+}
+
+<h2>Login</h2>
+
+<form class="form-horizontal" asp-controller="UserInfos" asp-action="Login" method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="form-group">
+        <label asp-for="UserName" class="control-label"></label>
+        <input asp-for="UserName" class="form-control" />
+        <span asp-validation-for="UserName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="UserEmail" class="control-label"></label>
+        <input asp-for="UserEmail" class="form-control" />
+        <span asp-validation-for="UserEmail" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Password" class="control-label"></label>
+        <input asp-for="Password" class="form-control" />
+        <span asp-validation-for="Password" class="text-danger"></span>
+    </div>
+
+    <div class="form-group ">
+
+        <input type="submit" value="Login" class="btn btn-primary" />
+
+    </div>
+
+</form>
