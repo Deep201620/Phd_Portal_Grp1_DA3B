@@ -15,9 +15,9 @@ namespace Phd_Portal_Grp1_DA3B.Models
 
         [Display(Name = "User Id")]
 
-        [ForeignKey("UserId")]
+        [ForeignKey(nameof(Student.user))]  //child table.navigation_property_object
         public int UserId { get; set; }
-        public virtual UserInfo user { get; set; }
+        public UserInfo user { get; set; }  //Naviagtion property
 
 
         [Display(Name = "Enrollment No")]
